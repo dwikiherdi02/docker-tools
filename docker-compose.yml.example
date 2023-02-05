@@ -1,0 +1,28 @@
+version: '3.1'
+
+name: tool
+
+services:
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    # restart: always
+    ports:
+      # - 8000:8080
+      - target: 8080
+        published: 8000
+        protocol: tcp
+        mode: host
+    networks:
+      - dbmt
+      - database_pgsql
+      - database_mysql
+
+networks:
+  dbmt:
+    driver: bridge
+  database_pgsql:
+    external: true
+  database_mysql:
+    external: true
